@@ -11,8 +11,8 @@ public class AlgorithmVisualization extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("visualization.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setTitle("Algorithm Visualization");
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
