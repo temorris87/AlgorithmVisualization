@@ -27,8 +27,6 @@ public class BubbleSortSimulation extends SortSimulation {
         }
         else if (this.getList()[leftActive] > this.getList()[rightActive]) {
             swapEntries(leftActive, rightActive);
-            leftActive++;
-            rightActive++;
         }
         else {
             leftActive++;
@@ -43,6 +41,8 @@ public class BubbleSortSimulation extends SortSimulation {
         super.swapEntries(indexOne, indexTwo);
 
         swapsPerformed++;
+        leftActive++;
+        rightActive++;
     }
 
     @Override
