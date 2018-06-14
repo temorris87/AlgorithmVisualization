@@ -31,15 +31,10 @@ public abstract class Simulation extends AnimationTimer {
         GraphicsContext g2d = canvas.getGraphicsContext2D();
         g2d.setFill(this.backgroundColor);
         g2d.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        g2d.setFill(this.foregroundColor);
     }
 
     protected Canvas getCanvas() {
         return canvas;
-    }
-
-    protected Color getBackgroundColor() {
-        return backgroundColor;
     }
 
     protected Color getForegroundColor() {
