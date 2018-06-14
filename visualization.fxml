@@ -6,7 +6,6 @@
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.layout.*?>
 
-
 <BorderPane stylesheets="@AlgorithmVisualization.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visualization.Controller">
    <right>
        <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -44,6 +43,16 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </ComboBox>
+            <Label prefHeight="17.0" prefWidth="206.0" text="Simulation Speed">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Slider fx:id="sldScansPerSecond" majorTickUnit="9.0" max="10.0" min="1.0" minorTickCount="8" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Slider>
               <Button fx:id="btnRunSimulation" mnemonicParsing="false" onMouseClicked="#exeRunSimulation" text="Run Simulation">
                  <VBox.margin>
                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

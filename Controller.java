@@ -1,19 +1,23 @@
 package visualization;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Slider;
+import visualization.sorting.InsertionSortSimulation;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-    public ComboBox <String> cbVisualizationType;
-    public ComboBox <String> cbAlgorithm;
-    public Button btnRunSimulation;
-    public Canvas cnvAlgorithmCanvas;
-    public ComboBox <Integer> cbSizeOfArray;
+    @FXML Slider sldScansPerSecond;
+    @FXML ComboBox <String> cbVisualizationType;
+    @FXML ComboBox <String> cbAlgorithm;
+    @FXML Button btnRunSimulation;
+    @FXML Canvas cnvAlgorithmCanvas;
+    @FXML ComboBox <Integer> cbSizeOfArray;
 
     private Simulation sim;
 
@@ -29,14 +33,17 @@ public class Controller implements Initializable {
 
         cbSizeOfArray.getItems().clear();
         cbSizeOfArray.getItems().addAll(10, 25, 50, 100, 200, 400, 800);
-        cbAlgorithm.getSelectionModel().selectFirst();
+        cbSizeOfArray.getSelectionModel().selectFirst();
 
-        sim = new Simulation(cnvAlgorithmCanvas);
+        sim = new InsertionSortSimulation(cnvAlgorithmCanvas);
+        sim.clearCanvas();
     }
 
     public void exeRunSimulation() {
         int size = cbSizeOfArray.getSelectionModel().getSelectedItem();
-        sim.updateList(size);
-        sim.updateCanvas();
+        sim.setScansPerSecond((int) sldScansPerSecond.getValue());
+        sim.initializeData(size);
+        sim.shuffleData();
+        sim.start();
     }
 }

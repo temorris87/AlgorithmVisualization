@@ -1,80 +1,73 @@
 package visualization;
 
+import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import java.util.Arrays;
-import java.util.Collections;
+public abstract class Simulation extends AnimationTimer {
 
-public class Simulation {
-    private Integer active;
     private Canvas canvas;
-    private Integer list[];
+    private int scansPerSecond = 2;
     private Color backgroundColor = Color.rgb(0x52, 0x4F, 0x52);
-    private Color foregroundColor = Color.rgb(130, 205, 185);
-    private Color highlightColor = Color.rgb(243,114,89);
+    private Color foregroundColor = Color.rgb(0,185,215);
+    private Color highlightColorOne = Color.rgb(243, 114, 89);
+    private Color highlightColorTwo = Color.rgb(130,205,185);
+    private Color highlightColorThree = Color.rgb(253,245,169);
 
     public Simulation(Canvas canvas) {
         this.canvas = canvas;
-        this.updateCanvas();
     }
 
     public Simulation(Canvas canvas, Color foregroundColor, Color backgroundColor, Color highlightColor) {
-        this(canvas);
+        this.canvas = canvas;
         this.foregroundColor = foregroundColor;
         this.backgroundColor = backgroundColor;
-        this.highlightColor = highlightColor;
+        this.highlightColorOne = highlightColor;
         this.updateCanvas();
     }
 
-    void updateCanvas() {
+    protected void clearCanvas() {
         GraphicsContext g2d = canvas.getGraphicsContext2D();
-
-        this.clearCanvas(g2d);
-
-        if (this.list == null)
-            return;
-
-        int padding;
-        if (list.length >= 100)
-            padding = 0;
-        else
-            padding = 2;
-
-        this.active = 15;
-        int unit_width = (int)(canvas.getWidth() / list.length);
-        int unit_height  = (int)(canvas.getHeight() / Collections.max(Arrays.asList(list)));
-
-        int x;
-        int y;
-        int box_height;
-        for ( int i = 0; i < list.length; i++) {
-            x = i * unit_width + padding;
-            y = (int) canvas.getHeight() + padding - list[i] * unit_height;
-            box_height = unit_height * list[i] - (2 * padding);
-
-            if (i == active) {
-                g2d.setFill(this.highlightColor);
-                g2d.fillRect(x, y, unit_width - (2 * padding), box_height);
-                g2d.setFill(this.foregroundColor);
-            }
-            else {
-                g2d.fillRect(x, y, unit_width - (2 * padding), box_height);
-            }
-        }
-    }
-
-    private void clearCanvas(GraphicsContext g2d) {
         g2d.setFill(this.backgroundColor);
         g2d.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         g2d.setFill(this.foregroundColor);
     }
 
-    void updateList(int size) {
-        this.list = new Integer[size];
-
-        for (int i = 0; i < size; i++)
-            this.list[i] = i+1;
+    protected Canvas getCanvas() {
+        return canvas;
     }
+
+    protected Color getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    protected Color getForegroundColor() {
+        return foregroundColor;
+    }
+
+    protected Color getHighlightColorOne() {
+        return highlightColorOne;
+    }
+
+    protected Color getHighlightColorTwo() {
+        return highlightColorTwo;
+    }
+
+    protected Color getHighlightColorThree() {
+        return highlightColorThree;
+    }
+
+    protected int getScansPerSecond() {
+        return scansPerSecond;
+    }
+
+    void setScansPerSecond(int scansPerSecond) {
+        this.scansPerSecond = scansPerSecond;
+    }
+
+    public abstract void updateCanvas();
+    public abstract void initializeData(int size);
+    public abstract void shuffleData();
 }
+
