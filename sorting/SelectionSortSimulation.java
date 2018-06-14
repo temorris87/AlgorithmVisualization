@@ -1,7 +1,6 @@
 package visualization.sorting;
 
 import javafx.scene.canvas.Canvas;
-import javafx.scene.paint.Color;
 
 public class SelectionSortSimulation extends SortSimulation {
 
@@ -11,10 +10,6 @@ public class SelectionSortSimulation extends SortSimulation {
 
     public SelectionSortSimulation(Canvas canvas) {
         super(canvas);
-    }
-
-    public SelectionSortSimulation(Canvas canvas, Color foregroundColor, Color backgroundColor, Color highlightColor) {
-        super(canvas, foregroundColor, backgroundColor, highlightColor);
     }
 
     @Override

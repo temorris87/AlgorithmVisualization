@@ -15,6 +15,8 @@ public abstract class Simulation extends AnimationTimer {
     private Color highlightColorTwo = Color.rgb(130,205,185);
     private Color highlightColorThree = Color.rgb(253,245,169);
 
+    private boolean simulationStarted;
+
     public Simulation(Canvas canvas) {
         this.canvas = canvas;
     }
@@ -27,10 +29,28 @@ public abstract class Simulation extends AnimationTimer {
         this.updateCanvas();
     }
 
+    @Override
+    public void start() {
+        super.start();
+
+        this.simulationStarted = true;
+    }
+
+    @Override
+    public void stop() {
+        super.stop();
+
+        this.simulationStarted = false;
+    }
+
     protected void clearCanvas() {
         GraphicsContext g2d = canvas.getGraphicsContext2D();
         g2d.setFill(this.backgroundColor);
         g2d.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    }
+
+    public boolean isSimulationStarted() {
+        return simulationStarted;
     }
 
     protected Canvas getCanvas() {

@@ -1,12 +1,12 @@
 package visualization;
 
-import com.sun.istack.internal.Nullable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
+import visualization.sorting.BubbleSortSimulation;
 import visualization.sorting.SelectionSortSimulation;
 
 import java.net.URL;
@@ -29,7 +29,7 @@ public class Controller implements Initializable {
         cbVisualizationType.getSelectionModel().selectFirst();
 
         cbAlgorithm.getItems().clear();
-        cbAlgorithm.getItems().addAll("Selection Sort");
+        cbAlgorithm.getItems().addAll("Bubble Sort", "Selection Sort");
         cbAlgorithm.getSelectionModel().selectFirst();
 
         cbSizeOfArray.getItems().clear();
@@ -40,14 +40,17 @@ public class Controller implements Initializable {
     public void exeRunSimulation() {
         int size = cbSizeOfArray.getSelectionModel().getSelectedItem();
 
-        sim = getSimulation(cbVisualizationType.getValue(), cbAlgorithm.getValue());
-        if (sim != null) {
-            sim.clearCanvas();
+        if (this.sim != null && this.sim.isSimulationStarted())
+            this.sim.stop();
 
-            sim.setScansPerSecond((int) sldScansPerSecond.getValue());
-            sim.initializeData(size);
-            sim.shuffleData();
-            sim.start();
+        this.sim = getSimulation(cbVisualizationType.getValue(), cbAlgorithm.getValue());
+        if (this.sim != null) {
+            this.sim.clearCanvas();
+
+            this.sim.setScansPerSecond((int) sldScansPerSecond.getValue());
+            this.sim.initializeData(size);
+            this.sim.shuffleData();
+            this.sim.start();
         }
     }
 
@@ -62,6 +65,8 @@ public class Controller implements Initializable {
 
     private Simulation getSortingSimulation(String algorithm) {
         switch (algorithm) {
+            case "Bubble Sort":
+                return new BubbleSortSimulation(cnvAlgorithmCanvas);
             case "Selection Sort":
                 return new SelectionSortSimulation(cnvAlgorithmCanvas);
             default:

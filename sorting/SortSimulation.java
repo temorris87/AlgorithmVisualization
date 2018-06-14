@@ -21,10 +21,6 @@ public abstract class SortSimulation extends Simulation {
         super(canvas);
     }
 
-    SortSimulation(Canvas canvas, Color foregroundColor, Color backgroundColor, Color highlightColor) {
-        super(canvas, foregroundColor, backgroundColor, highlightColor);
-    }
-
     Integer[] getList() {
         return list;
     }
