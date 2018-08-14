@@ -8,6 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import visualization.sorting.BubbleSortSimulation;
 import visualization.sorting.InsertionSortSimulation;
+import visualization.sorting.MergeSortSimulation;
 import visualization.sorting.SelectionSortSimulation;
 
 import java.net.URL;
@@ -30,7 +31,7 @@ public class Controller implements Initializable {
         cbVisualizationType.getSelectionModel().selectFirst();
 
         cbAlgorithm.getItems().clear();
-        cbAlgorithm.getItems().addAll("Bubble Sort", "Insertion Sort", "Selection Sort");
+        cbAlgorithm.getItems().addAll("Bubble Sort", "Insertion Sort", "Merge Sort", "Selection Sort");
         cbAlgorithm.getSelectionModel().selectFirst();
 
         cbSizeOfArray.getItems().clear();
@@ -74,6 +75,8 @@ public class Controller implements Initializable {
                 return new BubbleSortSimulation(cnvAlgorithmCanvas);
             case "Insertion Sort":
                 return new InsertionSortSimulation(cnvAlgorithmCanvas);
+            case "Merge Sort":
+                return new MergeSortSimulation(cnvAlgorithmCanvas);
             case "Selection Sort":
                 return new SelectionSortSimulation(cnvAlgorithmCanvas);
             default:
